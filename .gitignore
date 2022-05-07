@@ -1,0 +1,10 @@
+/nbproject/private/
+.idea/*
+logs
+nbproject
+composer.lock
+.buildpath
+.project
+.settings/
+
+
