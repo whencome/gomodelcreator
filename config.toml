@@ -1,0 +1,17 @@
+
+# 数据库配置
+[[item]]
+# 数据库类型
+driver = "mysql"
+# 数据库连接
+dsn = "root:C3s$lqf7rpmQg@tcp(47.108.137.104:3306)/information_schema?charset=utf8"
+# 真实数据库名称
+database = "hxj_summary"
+# 数据库连接名称，不设置则使用database配置,此值用于在model的GetDatabase()方法中返回
+# 服务根据此值的返回获取数据库连接，这里不必是真实的数据库名称，应该是获取数据库连接的标识名称
+conn_name = "hxj_summary"
+# 输出目录
+output_dir = "/mnt/d/Code/Go/gomodeltest"
+# 包名
+package = "gmtest"
+
