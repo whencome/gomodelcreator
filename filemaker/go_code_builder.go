@@ -95,14 +95,6 @@ func (fm *FileMaker) buildModel() string {
     buf.WriteString(fmt.Sprintf("}%s", NEW_LINE))
     buf.WriteString(NEW_LINE)
 
-    buf.WriteString(fmt.Sprintf("// New%sModel create a %s Model%s", modelType, modelType, NEW_LINE))
-    buf.WriteString(fmt.Sprintf("func New%sModel() *%sModel {%s", modelType, modelType, NEW_LINE))
-    buf.WriteString(fmt.Sprintf("\treturn &%sModel{%s", modelType, NEW_LINE))
-    buf.WriteString(fmt.Sprintf("\t\t%sMgr,%s", modelVarName, NEW_LINE))
-    buf.WriteString(fmt.Sprintf("\t}%s", NEW_LINE))
-    buf.WriteString(fmt.Sprintf("}%s", NEW_LINE))
-    buf.WriteString(NEW_LINE)
-
     // 提供常用的查询接口
     buf.WriteString(fmt.Sprintf("// GetPage 查询分页信息%s", NEW_LINE))
     buf.WriteString(fmt.Sprintf("func (m *%sModel) GetPage(conds interface{}, orderBy string, page, pageSize int) (*%sQueryResult, error) {%s", modelType, modelType, NEW_LINE))
@@ -162,6 +154,21 @@ func (fm *FileMaker) buildModel() string {
     buf.WriteString(fmt.Sprintf("\t\tresult = append(result, v)%s", NEW_LINE))
     buf.WriteString(fmt.Sprintf("\t}%s", NEW_LINE))
     buf.WriteString(fmt.Sprintf("\treturn result, nil%s", NEW_LINE))
+    buf.WriteString(fmt.Sprintf("}%s", NEW_LINE))
+    buf.WriteString(NEW_LINE)
+    return buf.String()
+}
+
+// 构造初始化model manager的方法
+func (fm *FileMaker) buildInitModelContent() string {
+    modelType := GetPropName(fm.TableName)
+    modelVarName := GetVarName(fm.TableName)
+    buf := bytes.Buffer{}
+    buf.WriteString(fmt.Sprintf("// New%sModel create a %s Model%s", modelType, modelType, NEW_LINE))
+    buf.WriteString(fmt.Sprintf("func New%sModel() *%sModel {%s", modelType, modelType, NEW_LINE))
+    buf.WriteString(fmt.Sprintf("\treturn &%sModel{%s", modelType, NEW_LINE))
+    buf.WriteString(fmt.Sprintf("\t\t%sMgr,%s", modelVarName, NEW_LINE))
+    buf.WriteString(fmt.Sprintf("\t}%s", NEW_LINE))
     buf.WriteString(fmt.Sprintf("}%s", NEW_LINE))
     buf.WriteString(NEW_LINE)
     return buf.String()

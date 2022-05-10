@@ -207,6 +207,7 @@ func (g *MySQLGenerator) convertDataType(dataType, columnType string) string {
     if strings.Contains(columnType, "unsigned") {
         isUnsigned = true
     }
+    isUnsigned = false
     if t == "bigint" || t == "int" {
         if isUnsigned {
             return "uint64"

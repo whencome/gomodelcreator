@@ -56,6 +56,12 @@ func (fm *FileMaker) createFile(f string) (bool, error) {
     if err != nil {
         return false, err
     }
+    // 写入初始化内容
+    initModelContent := fm.buildInitModelContent()
+    _, err = writer.WriteString(initModelContent)
+    if err != nil {
+        return false, err
+    }
     // 写入文件
     err = writer.Flush()
     if err != nil {
@@ -127,6 +133,7 @@ func (fm *FileMaker) getModelContent() string {
     buf.WriteString("// your own code should write below (after the mode-end comment) or place in a single file")
     buf.WriteString(NEW_LINE)
     buf.WriteString(MODEL_COMMENT_END)
+    buf.WriteString(NEW_LINE)
     buf.WriteString(NEW_LINE)
     return buf.String()
 }
